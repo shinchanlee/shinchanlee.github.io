@@ -17,14 +17,14 @@ textarea {
 @media screen and (min-width: 1280px) {
   .is-1-column .container,
   .is-2-column .container {
-    max-width: 1152px;
-    width: 1152px;
+    max-width: 960px;
+    width: 960px;
   }
 }
 @media screen and (min-width: 1472px) {
   .is-2-column .container {
-    max-width: 1344px;
-    width: 1344px;
+    max-width: 1152px;
+    width: 1152px;
   }
   .is-1-column .container {
     max-width: 960px;
@@ -142,6 +142,9 @@ img.thumbnail {
 .widget .menu-list a.level {
   display: flex;
 }
+.widget .has-text-centered figure.image {
+  margin: auto;
+}
 .pagination .pagination-link:not(.is-current),
 .pagination .pagination-previous,
 .pagination .pagination-next {
@@ -206,9 +209,8 @@ img.thumbnail {
   font-size: 1.15rem;
   position: relative;
 }
-.article .content a img {
-  margin: auto;
-  display: block;
+.article .content a {
+  word-wrap: break-word;
 }
 .rtl {
   direction: rtl;
@@ -233,7 +235,7 @@ img.thumbnail {
   overflow: hidden;
 }
 .donate .qrcode img {
-  max-width: 160px;
+  max-width: 280px;
 }
 .donate:hover .qrcode {
   display: block;
@@ -389,13 +391,19 @@ img.thumbnail {
 }
 .content code,
 .content pre {
-  font-size: 0.85em;
   font-family: "Source Code Pro", monospace, "Microsoft YaHei";
 }
+.content pre {
+  font-size: 0.85em;
+}
 .content code {
-  color: #ff3860;
-  background: transparent;
   padding: 0;
+  background: transparent;
+}
+.content > code,
+.content :not(pre) > code {
+  font-size: 0.85em;
+  color: #ff3860;
 }
 .content blockquote footer strong + cite {
   margin-left: 0.5em;
@@ -409,6 +417,9 @@ figure.highlight {
   position: relative;
   margin: 1em 0 1em !important;
 }
+figure.highlight.folded .highlight-body {
+  height: 0;
+}
 figure.highlight pre,
 figure.highlight table tr:hover {
   color: inherit;
@@ -417,11 +428,21 @@ figure.highlight table tr:hover {
 figure.highlight table {
   width: auto;
 }
+figure.highlight table tr td {
+  border: none;
+}
+figure.highlight table tr:not(:first-child) td {
+  padding-top: 0;
+}
+figure.highlight table tr:not(:last-child) td {
+  padding-bottom: 0;
+}
 figure.highlight pre {
   padding: 0;
   overflow: visible;
 }
-figure.highlight pre .line {
+figure.highlight pre .line,
+figure.highlight pre code .hljs {
   line-height: 1.5rem;
 }
 figure.highlight figcaption,
@@ -429,6 +450,7 @@ figure.highlight .gutter {
   background: rgba(200,200,200,0.15);
 }
 figure.highlight figcaption {
+  margin: 0 !important;
   padding: 0.3em 0.75em;
   text-align: left;
   font-style: normal;
@@ -438,9 +460,19 @@ figure.highlight figcaption span {
   font-weight: 500;
   font-family: "Source Code Pro", monospace, "Microsoft YaHei";
 }
+figure.highlight figcaption .fold,
 figure.highlight figcaption a {
-  float: right;
   color: #9a9a9a;
+}
+figure.highlight figcaption a {
+  margin-left: 0.5em;
+}
+figure.highlight figcaption .fold {
+  margin-right: 0.5em;
+  cursor: pointer;
+}
+figure.highlight .highlight-body {
+  overflow: auto;
 }
 figure.highlight .gutter {
   text-align: right;
@@ -460,19 +492,8 @@ figure.highlight .section {
   min-width: inherit;
   border-radius: inherit;
 }
-figure.highlight .copy {
-  display: none;
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  color: #fff;
-  background: rgba(0,0,0,0.5);
-}
-figure.highlight:hover .copy {
-  display: block;
-}
-/* ---------------------------------      
- *        Overflow Table
+/* ---------------------------------
+ *          Overflow Table
  * --------------------------------- */
 .table-overflow {
   overflow-x: auto;
@@ -484,7 +505,7 @@ figure.highlight:hover .copy {
   word-break: keep-all;
 }
 /* ---------------------------------
- *        Fix Video
+ *            Fix Video
  * --------------------------------- */
 .video-container {
   position: relative;
